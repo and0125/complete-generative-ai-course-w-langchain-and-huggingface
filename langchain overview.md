@@ -34,3 +34,24 @@ Initially langchain came and was able to work with a number of different models.
 Also Langchain-Community you can access the open source models, but the paid models require an API keys. You can use retrieval for loading documents, a vector store for working with text as a chatbot (there are a variety of these databases).
 
 We'll focus on the entire lifecycle of a generative AI product.
+
+## Virtual Environment
+
+Created a new folder for this project (each end to end project will have its own folder).
+
+Always needed to do a virtual env, and we'll add a specific set of packages in this venv.
+
+He recommended using python 3.10 for these uses.
+
+```text
+# requirements.txt
+langchain
+jupyter
+notebook
+```
+
+installing happened, then you're good to start projects in langchain. We'll do most of the beginning coding in a jupyter notebook, then move to files once we go through the basics.
+
+Need to have at least $5 for using the OpenAI API, which is useful for just getting the fundamentals of working with these APIs.
+
+Langchain is an open source framework for developing a Gen AI application. You actually need to create an account to use some of these modules. This enables you to create projects. 
