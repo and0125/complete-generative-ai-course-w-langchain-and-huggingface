@@ -10,6 +10,8 @@ Once these are done, you'd need the following packages:
 
 - langchain
 - python-dotenv: for importing env variables in jupyter notebooks.
+- langchain_community (needed as well)
+- pypdf (for pdf processing)
 
 This Will set you up to work with LangChain, LangSmith, and LangServe.
 
@@ -29,6 +31,40 @@ Then we'll **split pdfs into chunks**. This is because in later stages, when we 
 
 3rd step is to **embed the data**. This is `text embedding`, taking the text and converting it into vectors. This enables things like similarity search, which can use a cosine search to understand the differences between the sentences you are trying to find. There are plenty of open source embedding technique.
 
-Fourth, we need to store the vectors somewhere, which would be a **vector store database**. THere are a number of these, like FAISS, ChromaDB, AstraDB. From the vector db you can query this as well, but it will respond with just the context from the documents, not a crafted response. The vector databases are useful; and the responses from just the vector db are based on the similarity search. 
+Fourth, we need to store the vectors somewhere, which would be a **vector store database**. THere are a number of these, like FAISS, ChromaDB, AstraDB. From the vector db you can query this as well, but it will respond with just the context from the documents, not a crafted response. The vector databases are useful; and the responses from just the vector db are based on the similarity search.
 
-Then there's another part of the diagram, to talk through the prompt setup for the LLM, and assigning the model a role. From querying, the user will ask the vector store based on the system role and the document staff load check, and the ret
+Then there's another part of the diagram, to talk through the prompt setup for the LLM, and assigning the model a role. From querying, the user will ask the vector store based on the system role and the document staff load check, and then use a retrieval chain, which is responsible for querying the vector store DB. Through this reflection on the document, the model will retrieve and return your responses.
+
+You'd create a retrieval chain along with a prompt template to the LLM to get the response.
+
+## Important Components of Langchain
+
+We can do all the above steps with langchain.
+
+data ingestion can be done with the document loader in langchain.
+
+Need to get into the habit of reading the documentation; it is very scattered. The videos order the package to be easier to follow.
+
+Document loaders are a bunch of different ways to optimize loading documents.
+
+We'll go over the most common use cases for loading documents though.
+
+The first is the `text loader`, which is helpful for any `.txt` file.
+
+```python
+from langchain_community.document_loaders import TextLoader
+
+# initialize with file path
+loader = TextLoader("/path/to/file.txt")
+
+# creates a python object of the text
+text_documents = loader.load()
+```
+
+For a pdf file:
+
+```python
+from langchain_community.document_loaders import PyPDFLoader
+
+docs = PyPDFLoader('attention.pdf')
+```
