@@ -12,6 +12,7 @@ Once these are done, you'd need the following packages:
 - python-dotenv: for importing env variables in jupyter notebooks.
 - langchain_community (needed as well)
 - pypdf (for pdf processing)
+- beautiful soap (needed for )
 
 This Will set you up to work with LangChain, LangSmith, and LangServe.
 
@@ -66,5 +67,19 @@ For a pdf file:
 ```python
 from langchain_community.document_loaders import PyPDFLoader
 
+# returns a list of items of type Document
 docs = PyPDFLoader('attention.pdf')
 ```
+
+Another document loading technique is to load from any website:
+
+```python
+from langchanin_community.document_loaders import WebBaseLoader
+
+loader = WebBaseLoader("https://url/to/file.com")
+
+# gives entire webpage content
+loader.load()
+```
+
+
